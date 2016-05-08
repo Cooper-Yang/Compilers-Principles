@@ -16,7 +16,7 @@ output:	*.dyd
 
 input: 	*.dyd
 
-output:	*.dys *.var(变量名表) *.pro(过程名表)
+output:	*.dys *.var(变量名表) *.pro(过程名表) *.err(出错)
 
 ###Usage:
 
@@ -26,4 +26,4 @@ output:	*.dys *.var(变量名表) *.pro(过程名表)
 
 ##test.pas : 作为输入的待分析文件
 
-该文件中没有
+该文件中没有任何注释
