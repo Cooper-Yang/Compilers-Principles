@@ -70,6 +70,7 @@ class CURRENT_WORD:
 
 #主函数
 def main_func(input_argv = None):
+
 	#若定义了输入文件名
 	if len(input_argv) > 1:
 		#获取绝对路径
@@ -94,7 +95,7 @@ def main_func(input_argv = None):
 	input_file.close()
 	output_file.close()
 	
-	print sys.argv
+	#print sys.argv
 	print '\n finished \n'
 	return
 
@@ -120,7 +121,6 @@ def lexical_analysis(input_line = None):
 			#丢弃空格
 			if input_letter == ' ':
 				continue
-			
 			#若middle_place为空，移进
 			if middle_place.type == 0:
 				middle_place.word = middle_place.word + input_letter
