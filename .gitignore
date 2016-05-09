@@ -1,0 +1,19 @@
+# output file
+*.dyd
+*.dys
+*.var
+*.pro
+
+# git and vcs and Eclipse config file
+.git/
+.vscode/
+browse.VC.db
+*.project
+.settings/
+*.pydevproject
+
+# other
+Task_of_Chapter_6.c
+
+# Windows thumbnail db
+Thumbs.db
