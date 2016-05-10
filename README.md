@@ -8,7 +8,10 @@ output:	*.dyd
 
 ###Usage:
 
-	Usage
+	Lexical_analysis.py <input_file> <output_file>
+	
+	if input_file not specify, will use test.pas in current directory
+	if output_file note specify, will write to test.dyd in current directory
 	
 --------------
 

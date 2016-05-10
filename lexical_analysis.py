@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
 	读文件
-	去除多余的空格、CR LF符号（不过在用readline的时候\r没有显示出来，只有\n，或许这是python的机制）
+	去除多余的空格、CR LF符号（不过在用read方法的时候\r没有显示出来，只有\n，或许这是python的机制）
 '''
 import os
 import sys
@@ -178,7 +178,7 @@ def lexical_analysis(input_line = None):
 				middle_place.word = middle_place.word + input_letter
 				middle_place.type = middle_place.GetType()
 	#到达文件结尾，若middle_place不为空，则输出，否则输出文件结尾符号
-	if middle_place != 0:
+	if middle_place.type != 0:
 		output_line.append(middle_place.FormatOut())
 	output_line.append(str('EOF').rjust(16)+' '+'25')
 	return output_line
