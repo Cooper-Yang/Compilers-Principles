@@ -53,19 +53,19 @@ class CURRENT_WORD:
 		return self.type
 	#获取所属种别
 	def GetDivision(self):
-		temp = WORD_TABLE.index(self.word)
-		if temp is None:
-			if self.word.isalnum() is True and self.word[0].isalpha() is True:
-				return 10
-			elif self.word.isdigit() is True:
-				return 11
-			else:
-				return 0
-		else:
+		try:
+			temp = WORD_TABLE.index(self.word)
 			return temp
+		except ValueError:
+			if self.type == 1:
+					return 10
+			elif self.type == 2:
+					return 11
+			else:
+					return 0
 	#输出
 	def FormatOut(self):
-		out = self.word.rjust(16)+' '+str(self.GetDivision).rjust(2)+'\n'
+		out = self.word.rjust(16)+' '+str(self.GetDivision()).rjust(2)+'\n'
 		return out
 
 #主函数
@@ -86,7 +86,7 @@ def main_func(input_argv = None):
 	input_file = open(INPUT_PATH, 'r')
 	output_file = open(OUTPUT_PATH, 'w')
 	
-	#按行处理，并将处理结果写入文件
+	#进行处理，并将处理结果写入文件
 	input_str = input_file.read()
 	output_str = lexical_analysis(input_str)
 	output_file.writelines(output_str)
@@ -109,20 +109,17 @@ def lexical_analysis(input_line = None):
 	middle_place = CURRENT_WORD()
 	for input_letter in input_line:
 		#若到行末尾，将middle_place重置，并在输出添加一个行结尾
+		#如果middle_place不为空，将其内容输出
 		if input_letter == '\n':
+			if middle_place != 0:
+				output_line.append(middle_place.FormatOut())
 			middle_place.reset()
-			output_line.append(str('EOLN').rjust(16)+' '+'24')
+			output_line.append(str('EOLN').rjust(16)+' '+'24'+'\n')
 			continue
-		#若到文件结束，在输出添加文件结尾，并退出循环
-		elif input_letter == '':
-			output_line.append(str('EOF').rjust(16)+' '+'25')
-			break
 		else:
-			#丢弃空格
-			if input_letter == ' ':
-				continue
 			#若middle_place为空，移进
 			if middle_place.type == 0:
+				middle_place.reset()
 				middle_place.word = middle_place.word + input_letter
 				middle_place.type = middle_place.GetType()
 			#处理字符+数字
@@ -180,6 +177,10 @@ def lexical_analysis(input_line = None):
 				middle_place.reset()
 				middle_place.word = middle_place.word + input_letter
 				middle_place.type = middle_place.GetType()
+	#到达文件结尾，若middle_place不为空，则输出，否则输出文件结尾符号
+	if middle_place != 0:
+		output_line.append(middle_place.FormatOut())
+	output_line.append(str('EOF').rjust(16)+' '+'25')
 	return output_line
 
 if __name__ == "__main__":
