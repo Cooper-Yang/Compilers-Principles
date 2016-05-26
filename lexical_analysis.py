@@ -95,6 +95,8 @@ def main_func(input_argv=None):
 	#打开文件
 	input_file = open(input_path, 'r')
 	output_file = open(output_path, 'w')
+	error_path = os.path.abspath('./test.err')
+	err_file = open(error_path, 'w')
 
 	#进行处理，并将处理结果写入文件
 	input_str = input_file.read()
@@ -104,6 +106,7 @@ def main_func(input_argv=None):
 	#关闭文件
 	input_file.close()
 	output_file.close()
+	err_file.close()
 
 	#print sys.argv
 	print '\n finished \n'
